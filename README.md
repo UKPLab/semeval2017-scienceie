@@ -36,9 +36,9 @@ background details on the respective publication.
 
 * `crawl/` -- this folder contains scripts to crawl additional Elsevier articles
 * `scripts_submission/` -- shell scripts for running the individual systems
-* `skip-thoughts/` -- document classifier, incorporating code from [[https://bitbucket.org/TomKenter/siamese-cbow/src]]
+* `skip-thoughts/` -- document classifier, incorporating code from https://bitbucket.org/TomKenter/siamese-cbow/src
 * `requirements.txt` -- a text file with the names of the required Python modules
-* The data can be obtained from the shared task website: [[https://scienceie.github.io/resources.html]]
+* The data can be obtained from the shared task website: https://scienceie.github.io/resources.html
 
 ## Requirements
 
