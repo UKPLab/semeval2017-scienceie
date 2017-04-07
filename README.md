@@ -18,7 +18,7 @@ Please cite the paper as:
 }
 ```
 
-> **Abstract:** This paper describes our approach to the SemEval 2017 Task 10: “Extracting Keyphrases and Relations from Scientific Publications”, specifically to Subtask (B): “Classification of identified keyphrases”.
+> **Abstract:** This paper describes our approach to the SemEval 2017 Task 10: "Extracting Keyphrases and Relations from Scientific Publications", specifically to Subtask (B): "Classification of identified keyphrases".
 > We explored three different deep learning approaches: a character-level convolutional neural network (CNN), a stacked learner with an MLP meta-classifier, and an attention based Bi-LSTM. From these approaches, we created an ensemble of differently hyper-parameterized systems, achieving a micro-F 1 -score of 0.63 on the test data. Our approach ranks 2nd (score of 1st placed system: 0.64) out of five according to this official score. 
 > However, we erroneously trained 2 out of 3 neural nets (the stacker and the CNN) on only roughly 15% of the full data (the original development set). When trained on the full data (training+development), our ensemble has a micro-F 1 -score of 0.69.
 
@@ -34,10 +34,10 @@ background details on the respective publication.
 
 ## Project structure
 
-* `code`
+* `code/`
    * `crawl/` -- this folder contains scripts to crawl additional Elsevier articles
    * `skip-thoughts/` -- document classifier, incorporating code from https://bitbucket.org/TomKenter/siamese-cbow/src
-* `data` -- the data can be obtained from the shared task website: https://scienceie.github.io/resources.html
+* `data/` -- the data can be obtained from the shared task website: https://scienceie.github.io/resources.html
 * `scripts_submission/` -- shell scripts for running the individual systems
 * `scripts/` -- evaluation scripts provided by the task organizers
 * `requirements.txt` -- a text file with the names of the required Python modules
@@ -59,7 +59,7 @@ Put the following embeddings into `data/embeddings`:
 * Komninos word embeddings: [komninos] (wiki_extvec.gz)
 * Levy word embeddings: [levy] (Bag of Words (k = 2) [words])
 
-Put the training and test data into `data/train` and `data/test` respectively:
+Put the training, dev and test data into `data/train`, `data/dev` and `data/test`, respectively. For running the experiment scripts below, also create `data/combined`, and copy the `train` and `dev` data into it.
 * Training and test data: [science-ie-data]
 
 Further, the keras version has a bug regarding unicode, which has to be fixed as e.g. described in [keras-fix].
