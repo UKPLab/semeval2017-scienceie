@@ -47,8 +47,8 @@ background details on the respective publication.
 * 64-bit Linux versions (not tested on other platforms)
 * Python 2.7
 * Python modules in the `requirements.txt` file
-* [keras] [keras]
-* Suitable word embeddings in **text format** (e.g. [glove.6B.zip] [glove_embed])
+* [keras] with [tensorflow] or [theano]
+* Suitable word embeddings in **text format** (see below)
 
 ## Running the experiments
 
@@ -68,6 +68,7 @@ The scripts to start the experiments can be found in `scripts_submission`.
 
    [keras]: <https://keras.io/>
    [tensorflow]: <https://www.tensorflow.org/>
+   [theano]: <https://github.com/Theano/Theano>
    [glove]: <http://nlp.stanford.edu/projects/glove>
    [komninos]: <https://www.cs.york.ac.uk/nlp/extvec/>
    [levy]: <https://levyomer.wordpress.com/2014/04/25/dependency-based-word-embeddings/>
