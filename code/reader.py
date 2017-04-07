@@ -2,9 +2,10 @@
 # -*- coding: UTF-8 -*-
 
 import codecs, os, glob
-from extras import offset_tokenize
-from extras import segment_text
-from extras import utf8ify
+#from extras import offset_tokenize
+#from extras import segment_text
+import extras
+#from extras import utf8ify
 
 import sys
 
@@ -86,7 +87,7 @@ class Document:
         self.domain = domain
 
     def index_sentences_and_tokens(self):
-        segmented_text = segment_text(self.text)
+        segmented_text = extras.segment_text(self.text)
         for sentence in segmented_text:
             self.sentence_index[sentence.sid] = sentence
             self.sentences.append(sentence)
@@ -196,25 +197,11 @@ class ScienceIEBratReader:
         uid, ann, string = string.split("\t")
         if ";" not in ann:
             etype, start, end = ann.split(" ")
-            return Entity(int(start), int(end), etype, utf8ify(string), uid, docid)
+            return Entity(int(start), int(end), etype, extras.utf8ify(string), uid, docid)
         else:
             # Multiwords are covered from first token's start to the last token's end
             spans = ann.split(";")
             etype = spans[0].split(" ")[0]
             start = spans[0].split(" ")[1]
             end = spans[-1].split(" ")[1]
-            return Entity(int(start), int(end), etype, utf8ify(string), uid, docid)
-
-
-if __name__ == "__main__":
-    r = ScienceIEBratReader("/home/likewise-open/UKP/kuznetsov/Experiments/ScienceIE_Shared_Task/scienceie2017_train/train2")
-    err = 0
-    fix = 0
-    total_entities = 0
-    for d in r.read():
-        err += d.errors
-        fix += d.fixed
-        total_entities += len(d.entities)
-    print(err, fix, total_entities)
-
-
+            return Entity(int(start), int(end), etype, extras.utf8ify(string), uid, docid)

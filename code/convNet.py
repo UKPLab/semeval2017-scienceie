@@ -157,7 +157,8 @@ if __name__=="__main__":
 
     train_src = sys.argv[1]
     dev_src = sys.argv[2]
-    vsm_path = sys.argv[3]
+#    vsm_path = sys.argv[3]
+    vsm_path = None
 
     print("Loading VSM")
     vsm = VSM(vsm_path)

@@ -25,9 +25,11 @@ from keras.utils.np_utils import probas_to_classes, to_categorical
 from sklearn.metrics import confusion_matrix, precision_recall_fscore_support
 from sklearn.utils.class_weight import compute_class_weight
 
-def get_folder():
+def get_folder(parent_path):
     fid = os.path.basename(__file__)[:-3] + "_" + "-".join(map(str, config))
-    output_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "results-" + fid)
+#    output_dir = os.path.join(os.path.dirname(os.path.realpath(__file__)), "results-" + fid)
+    output_dir = os.path.join(parent_path, "results-" + fid)
+    print output_dir
     return output_dir
 
 
@@ -101,17 +103,18 @@ if __name__ == "__main__":
     logger = logging.getLogger("main")
     logger.setLevel(logging.INFO)
 
-    if len(sys.argv) < 3:
-        print("Usage: python blstm.py path_to_training path_to_testing path_to_emb_file [configuration_string]")
+    if len(sys.argv) < 5:
+        print("Usage: python blstm.py path_to_training path_to_testing path_to_emb_file output_path [configuration_string]")
         sys.exit()
 
     train_src = sys.argv[1]
     dev_src = sys.argv[2]
     vsm_path = sys.argv[3]
+    output_path = sys.argv[4]
 
     # if a configuration string is given, use that (for re-running experiments)
-    if len(sys.argv) > 4:
-        imported_config = sys.argv[4]
+    if len(sys.argv) > 5:
+        imported_config = sys.argv[5]
         MAX_SEQUENCE_LENGTH, MAX_NB_WORDS, EPOCHS, BATCH_SIZE, CLASS_WEIGHTS = imported_config.split("_")[-1].split("-")
 
         MAX_SEQUENCE_LENGTH = int(MAX_SEQUENCE_LENGTH) if MAX_SEQUENCE_LENGTH != "None" else None
@@ -120,7 +123,7 @@ if __name__ == "__main__":
         BATCH_SIZE = int(BATCH_SIZE)
         CLASS_WEIGHTS = True if CLASS_WEIGHTS == "True" else False
         config = [MAX_SEQUENCE_LENGTH, MAX_NB_WORDS, EPOCHS, BATCH_SIZE, CLASS_WEIGHTS]
-        output_dir = get_folder()
+        output_dir = get_folder(output_path)
 
         # don't rerun if experiment already exists
         if os.path.exists(output_dir):
@@ -136,7 +139,7 @@ if __name__ == "__main__":
             BATCH_SIZE = random.choice([12,24,32])
             CLASS_WEIGHTS = random.choice([True, False])
             config = [MAX_SEQUENCE_LENGTH, MAX_NB_WORDS, EPOCHS, BATCH_SIZE, CLASS_WEIGHTS]
-            output_dir = get_folder()
+            output_dir = get_folder(output_path)
 
             # only run non-existing configurations (i.e. exit loop)
             if not os.path.exists(output_dir):
