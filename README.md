@@ -34,11 +34,13 @@ background details on the respective publication.
 
 ## Project structure
 
-* `crawl/` -- this folder contains scripts to crawl additional Elsevier articles
+* `code`
+   * `crawl/` -- this folder contains scripts to crawl additional Elsevier articles
+   * `skip-thoughts/` -- document classifier, incorporating code from https://bitbucket.org/TomKenter/siamese-cbow/src
+* `data` -- the data can be obtained from the shared task website: https://scienceie.github.io/resources.html
 * `scripts_submission/` -- shell scripts for running the individual systems
-* `skip-thoughts/` -- document classifier, incorporating code from https://bitbucket.org/TomKenter/siamese-cbow/src
+* `scripts/` -- evaluation scripts provided by the task organizers
 * `requirements.txt` -- a text file with the names of the required Python modules
-* The data can be obtained from the shared task website: https://scienceie.github.io/resources.html
 
 ## Requirements
 
@@ -50,46 +52,25 @@ background details on the respective publication.
 
 ## Running the experiments
 
-* Stacker:
+To run the experiments described in our paper you have to aquire following resources.
 
-    ```
-    train=train3+dev/ # training data directory, each file therein in *.ann,*.xml,*.txt form 
-    embeddings=/data/wordvecs/ExtendedDependencyBasedSkip-gram/wiki_extvec_words # Komninos embeddings 
-    cs=4 
-    
-    python stackedLearner.py ${train} test/scienceie2017_test_unlabelled/ ${embeddings} ${cs} None document > stacker.out 
-    
-    The predictions will be in the file "stacker.out". Further do: 
-    
-    ./extract.py < stacker.out > stacker.extracted 
-    ./writeout.py test/scienceie2017_test_unlabelled stacker.extracted MY_PRED_DIR > msg 2>err_msg 
-    python scripts/eval.py GoldTest/semeval_articles_test/ MY_PRED_DIR rel
-    ```
+Put the following embeddings into `data/embeddings`:
+* Glove word embeddings: [glove] (glove.6B.zip and glove.42B.300d.zip)
+* Komninos word embeddings: [komninos] (wiki_extvec.gz)
+* Levy word embeddings: [levy] (Bag of Words (k = 2) [words])
 
-* Char-CNN: 
+Put the training and test data into `data/train` and `data/test` respectively:
+* Training and test data: [science-ie-data]
 
-    ```
-    baseCMD="convNet.py train3+dev/ test/scienceie2017_test_unlabelled/ empty"
-    cs=4 
-    L=50 
-    M=80 
-    R=50 
-    nfilter=300 
-    filter_length=3
-    document=document
-    python ${baseCMD} ${cs} ${L} ${M} ${R} ${nfilter} ${filter_length} ${document} > conv.out
-    
-    The predictions will be in the file "conv.out". Further do: 
-    
-    ./extract.py < conv.out > conv.extracted 
-    ./writeout.py test/scienceie2017_test_unlabelled conv.extracted MY_PRED_DIR > msg 2>err_msg 
-    python scripts/eval.py GoldTest/semeval_articles_test/ MY_PRED_DIR rel
-    ```
-* AB-LSTM:
-    * Modify `run_blstm.sh` to reflect your data paths, then run it.
-    * This will create and run 20 different configurations of the AB-LSTM, and write output ANN files into resp. output folders.
+Further, the keras version has a bug regarding unicode, which has to be fixed as e.g. described in [keras-fix].
+
+The scripts to start the experiments can be found in `scripts_submission`.
 
    [keras]: <https://keras.io/>
    [tensorflow]: <https://www.tensorflow.org/>
-   [glove_embed]: <http://nlp.stanford.edu/data/glove.6B.zip>
+   [glove]: <http://nlp.stanford.edu/projects/glove>
+   [komninos]: <https://www.cs.york.ac.uk/nlp/extvec/>
+   [levy]: <https://levyomer.wordpress.com/2014/04/25/dependency-based-word-embeddings/>
    [science-ie]: <https://scienceie.github.io/>
+   [science-ie-data]: <https://scienceie.github.io/resources.html>
+   [keras-fix]: <https://github.com/fchollet/keras/issues/1072#issuecomment-241682313>
