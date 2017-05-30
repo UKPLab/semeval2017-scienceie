@@ -22,6 +22,12 @@ Please cite the paper as:
 > We explored three different deep learning approaches: a character-level convolutional neural network (CNN), a stacked learner with an MLP meta-classifier, and an attention based Bi-LSTM. From these approaches, we created an ensemble of differently hyper-parameterized systems, achieving a micro-F1-score of 0.63 on the test data. Our approach ranks 2nd (score of 1st placed system: 0.64) out of four according to this official score. 
 > However, we erroneously trained 2 out of 3 neural nets (the stacker and the CNN) on only roughly 15% of the full data, namely, the original development set. When trained on the full data (training+development), our ensemble has a micro-F1-score of 0.69.
 
+Contact persons: 
+  * Steffen Eger, eger@ukp.informatik.tu-darmstadt.de
+  * Erik-Lân Do Dinh, dodinh@ukp.informatik.tu-darmstadt.de
+  * Ilia Kutsnezov, kutsnezov@ukp.informatik.tu-darmstadt.de
+  * Masoud Kiaeeha, kiaeeha@ukp.informatik.tu-darmstadt.de
+
 https://www.ukp.tu-darmstadt.de/
 
 https://www.tu-darmstadt.de/
