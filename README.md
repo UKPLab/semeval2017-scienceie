@@ -1,6 +1,8 @@
-# SemEval 2017 Task 10: ScienceIE - Extracting Keyphrases and Relations from Scientific Publications
+# EELECTION at SemEval-2017 Task 10: Ensemble of nEural Learners for kEyphrase ClassificaTION
+## SemEval 2017 Task 10: ScienceIE - Extracting Keyphrases and Relations from Scientific Publications.
 
-This repository contains the code needed to reproduce our results for the shared task [ScienceIE] [science-ie] reported in Eger et al., *EELECTION at SemEval-2017 Task 10: Ensemble of nEural Learners for kEyphrase ClassificaTION*.
+
+This repository contains the code needed to reproduce our results for the shared task [ScienceIE] [science-ie] reported in Eger et al., *EELECTION at SemEval-2017 Task 10: Ensemble of nEural Learners for kEyphrase ClassificaTION*. 
 
 Please cite the paper as:
 
