@@ -15,7 +15,7 @@ Please cite the paper as:
   year      = {2017},
   address   = {Vancouver, Canada},
   publisher = {Association for Computational Linguistics},
-  pages     = {(to appear)},
+  pages     = {942--946},
   url       = {https://github.com/UKPLab/semeval2017-scienceie}
 }
 ```
